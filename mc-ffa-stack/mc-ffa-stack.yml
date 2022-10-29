@@ -1,0 +1,50 @@
+version: "3"
+
+# Minecraft FFA server
+# ====================
+#
+# Version   1.19.2-PAPER
+# Port      25565
+# Rcon port 25566
+
+services:
+  mc:
+    image: itzg/minecraft-server:java17-alpine
+    ports:
+      - 25565:25565
+      - 25565:25565/udp
+      - 25566:25566
+    environment:
+      EULA: "TRUE"
+      VERSION: "1.19.2"
+      TYPE: "PAPER"
+      ENABLE_RCON: true
+      RCON_PASSWORD: "YouWillNeverKnow"
+      RCON_PORT: 25566
+      SYNC_CHUNK_WRITES: "false"
+      VIEW_DISTANCE: 16
+      MODE: survival
+      PVP: true
+      MAX_PLAYERS: 100
+      ENABLE_QUERY: true
+      OPS: "f7e7d22b-2f52-3086-a21e-ae0e1d3783ab"
+      SPIGET_RESOURCES: ""
+      MEMORY: "4G"
+      ONLINE_MODE: "TRUE"
+    tty: true
+    stdin_open: true
+    restart: unless-stopped
+    volumes:
+      - "mc_data:/data"
+      - "mc_plugins:/plugins"
+      - "mc_config:/config"
+    networks:
+      gamernet:
+        ipv4_address: 10.42.42.32
+volumes:
+  mc_data:
+  mc_plugins:
+  mc_config:
+networks:
+  gamernet:
+    external: true
