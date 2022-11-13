@@ -1,9 +1,0 @@
-CREATE TABLE service (
-    id text,
-    name text,
-    icon text,
-    dark_supported text,
-    online int,
-    hostname text,
-    port text
-);
